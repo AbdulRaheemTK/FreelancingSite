@@ -1,0 +1,612 @@
+<%- include('includes/head.ejs') %>
+  <!-- <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> -->
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <%- include('includes/navigation.ejs') %>
+      <!-- Main Section -->
+      <main class="settingsPage profile my-md">
+        <div class="container">
+          <div class="layout">
+            <div class="column column--1of3">
+              <div class="card text-center">
+                <div class="card__body dev">
+                  <a class="tag tag--pill tag--main settings__btn" href="/account/edit/personalInformation"
+                    data-toggle="modal" data-target="#editPersonalInformationModal"><i class="im im-edit"></i> Edit</a>
+                  <img class="avatar avatar--xl dev__avatar" alt="User's Image"
+                    src="<%= user.personalInformation.personelImageLink%>" />
+                  <h2 class="dev__name">
+                    <% if (user.personalInformation.name) { %>
+                      <%= user.personalInformation.name %>
+                        <% } else { %> User's Name <% } %>
+                  </h2>
+                  <p class="dev__title">
+                    <% if (user.personalInformation.abilitiesAndExperiences) { %>
+                      <%= user.personalInformation.abilitiesAndExperiences %>
+                        <% } else { %>User's Field & Interest<% } %>
+                  </p>
+                  <p class="dev__location">Based in <% if (user.personalInformation.city) { %>
+                      <%= user.personalInformation.city %>
+                        <% } else { %>City<% } %>, <% if (user.personalInformation.country) { %>
+                              <%= user.personalInformation.country %>
+                                <% } else { %>Country<% } %>
+                  </p>
+                  <ul class="dev__social">
+                    <li>
+                      <a title="Github" href="<%= user.personalInformation.gitHubLink %>" target="_blank"><i
+                          class="im im-github"></i></a>
+                    </li>
+                    <li>
+                      <a title="Stackoverflow" href="<%= user.personalInformation.stackOverFlowLink %>"
+                        target="_blank"><i class="im im-stackoverflow"></i></a>
+                    </li>
+                    <li>
+                      <a title="Twitter" href="<%= user.personalInformation.twitterLink %>" target="_blank"><i
+                          class="im im-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a title="LinkedIn" href="<%= user.personalInformation.linkedInLink %>" target="_blank"><i
+                          class="im im-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a title="Personal Website" href="<%= user.personalInformation.personalWebsiteLink %>"
+                        target="_blank"><i class="im im-globe"></i></a>
+                    </li>
+                  </ul>
+                  <!-- <a href="#" class="btn btn--sub btn--lg">Send Message </a> -->
+                </div>
+              </div>
+            </div>
+            <!-- Personel Information Modal -->
+            <div class="modal fade" id="editPersonalInformationModal" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header ">
+                    <h5 class="text-center modal-title" id="exampleModalLabel">Edit Personal Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <main class="formPage">
+                      <div class="content-box">
+                        <div class="user-message user-message--error">
+                          <b>Please add all the Information in the form along with about me in order to get yourself visible in our freelancing developers page</b>
+                        </div>
+                        <form action="/postAccountPersonalInformation" class="form" method="POST"
+                          enctype="multipart/form-data">
+                          <!-- Input:Text -->
+                          <div class="form__field">
+                            <label for="formInput#text">Name: </label>
+                            <input class="input input--text" id="formInput#text" type="text" name="EPIName"
+                              value="<%= user.personalInformation.name %>" pattern="[a-zA-Z'-'\s]*"
+                              title="Alphabets are allowed only!" />
+                          </div>
+                          <!-- Input:TextArea -->
+                          <div class="form__field">
+                            <label for="formInput#text">Abilities & Experiences: </label>
+                            <textarea class="input input--text" id="formInput#text" type="text"
+                              name="EPIAbilitiesAndExperiences"><%= user.personalInformation.abilitiesAndExperiences %></textarea>
+                          </div>
+                          <!-- Input:Image -->
+                          <div class="form__field">
+                            <label for="formInput#text">Personel Image: </label>
+                            <input class="input input--text" id="formInput#text" type="file" name="EPIImage"
+                              accept="image/png, image/jpeg, image/jpg" title="PNG, JPEG, JPG Formats are allowed" />
+                          </div>
+                          <!-- Input:Text -->
+                          <div class="form__field">
+                            <label for="formInput#text">City: </label>
+                            <input class="input input--text" id="formInput#text" type="text" name="EPICity"
+                              pattern="[a-zA-Z'-'\s]*" title="Alphabets are allowed only!"
+                              value="<%= user.personalInformation.city %>" />
+                          </div>
+                          <!-- Input:Text -->
+                          <div class="form__field">
+                            <label for="formInput#text">Country: </label>
+                            <input class="input input--text" id="formInput#text" type="text" name="EPICountry"
+                              pattern="[a-zA-Z'-'\s]*" title="Alphabets are allowed only!"
+                              value="<%= user.personalInformation.country %>" />
+                          </div>
+                          <!-- Input:url -->
+                          <div class="form__field">
+                            <label for="formInput#text">Git Hub Link: </label>
+                            <input class="input input--text" id="formInput#text" type="url" name="EPIGitHubLink"
+                              title="URL are accepted only!" value="<%= user.personalInformation.gitHubLink %>" />
+                          </div>
+                          <!-- Input:url -->
+                          <div class="form__field">
+                            <label for="formInput#text">Stackoverflow Link: </label>
+                            <input class="input input--text" id="formInput#text" type="url" name="EPIStackoverflowLink"
+                              title="URL are accepted only!"
+                              value="<%= user.personalInformation.stackOverFlowLink %>" />
+                          </div>
+                          <!-- Input:url -->
+                          <div class="form__field">
+                            <label for="formInput#text">Twitter Link: </label>
+                            <input class="input input--text" id="formInput#text" type="url" name="EPITwitterLink"
+                              title="URL are accepted only!" value="<%= user.personalInformation.twitterLink %>" />
+                          </div>
+                          <!-- Input:url -->
+                          <div class="form__field">
+                            <label for="formInput#text">LinkedIn Link: </label>
+                            <input class="input input--text" id="formInput#text" type="url" name="EPILinkedInLink"
+                              title="URL are accepted only!" value="<%= user.personalInformation.linkedInLink %>" />
+                          </div>
+                          <!-- Input:url -->
+                          <div class="form__field">
+                            <label for="formInput#text">Personal Website Link: </label>
+                            <input class="input input--text" id="formInput#text" type="url"
+                              name="EPIPersonalWebsiteLink"
+                              value="<%= user.personalInformation.personalWebsiteLink %>" />
+                          </div>
+                          <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                        </form>
+
+                      </div>
+                    </main>
+                  </div>
+                  <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+          </div> -->
+                </div>
+              </div>
+            </div>
+            <!-- Personel Information Modal -->
+            <div class="column column--2of3">
+              <div class="devInfo">
+                <h3 class="devInfo__title">About Me <a class="tag tag--pill tag--main settings__btn float-right"
+                    href="/account/edit/aboutme" data-toggle="modal" data-target="#aboutMeModal"><i
+                      class="im im-edit"></i> Edit</a></h3>
+                <!-- About Me Modal -->
+                <div class="modal fade" id="aboutMeModal" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header ">
+                        <h5 class="text-center modal-title" id="exampleModalLabel">ABOUT ME</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <main class="formPage">
+                          <div class="content-box">
+                            <div class="user-message user-message--error">
+                              <b>Please add all the Information in the form in order to get yourself visible in our freelancing developers page</b>
+                            </div>
+                            <form action="/postAccountAboutMe" class="form" method="POST">
+                              <!-- Input:TextArea -->
+                              <div class="form__field">
+                                <label for="formInput#text">About Me: </label>
+                                <textarea class="input input--text" id="formInput#text" type="text" rows="5"
+                                  name="EPIAboutMe"><%=user.aboutMe %></textarea>
+                              </div>
+                              <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                            </form>
+
+                          </div>
+                        </main>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- About me Modal -->
+                <p class="devInfo__about">
+                  <% if (user.aboutMe) { %>
+                    <%=user.aboutMe %>
+                      <% } else { %>
+                        <h4 class="text-center">Write something about yourself here!</h4>
+                        <% } %>
+                </p>
+              </div>
+              <div class="settings">
+                <h3 class="settings__title">Skills</h3>
+                <a class="tag tag--pill tag--sub settings__btn tag--lg" href="/account/edit/skill" data-toggle="modal"
+                  data-target="#addSkillsModal">
+                  <i class="im im-plus"></i> Add Skill</a>
+              </div>
+              <!-- Add Skills Modal -->
+              <div class="modal fade" id="addSkillsModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header ">
+                      <h5 class="text-center modal-title" id="exampleModalLabel">Add Skill</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <main class="formPage">
+                        <div class="content-box">
+                          <form action="/postAccountAddSkill" class="form" method="POST">
+                            <!-- Input:Text -->
+                            <div class="form__field">
+                              <label for="formInput#text">Name: </label>
+                              <input class="input input--text" id="formInput#text" type="text" name="skillName"
+                                pattern="[a-zA-Z'-'\s]*" title="Alphabets are allowed only!" placeholder="Enter text" />
+                            </div>
+                            <!-- Input:TextArea -->
+                            <div class="form__field">
+                              <label for="formInput#text">Description: </label>
+                              <textarea class="input input--text" id="formInput#text" type="text"
+                                name="skillDescription" placeholder="Enter text"></textarea>
+                            </div>
+                            <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                          </form>
+
+                        </div>
+                      </main>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Skills Modal -->
+
+              <table class="settings__table card">
+                <% if (user.skills.length <=0) { %>
+                  <h4 class="text-center">No Skill Added!</h4>
+                  <h4 class="text-center">Add your Skills!</h4>
+                  <% } else { %>
+                    <% user.skills.forEach(skill=> { %>
+                      <tr>
+                        <td class="settings__tableInfo">
+                          <h4>
+                            <%= skill.name %>
+                          </h4>
+                          <p>
+                            <%= skill.description%>
+                          </p>
+                          <input class="input input--text" id="formInput#text" type="text" name="skillId"
+                            value="<%= skill._id %>" hidden />
+                        </td>
+                        <td class="settings__tableActions">
+                          <a class="tag tag--pill tag--main settings__btn" href="#" data-toggle="modal"
+                            data-target="#Edit<%= skill._id %>"><i class="im im-edit"></i> Edit</a>
+                          <a class="tag tag--pill tag--main settings__btn" href="#" data-toggle="modal"
+                            data-target="#Delete<%= skill._id %>"><i class="im im-x-mark-circle-o"></i>Delete</a>
+                        </td>
+                      </tr>
+                      <!-- Edit Skills Modal -->
+                      <div class="modal fade" id="Edit<%= skill._id %>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header ">
+                              <h5 class="text-center modal-title" id="exampleModalLabel">Edit Skill</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <main class="formPage">
+                                <div class="content-box">
+                                  <form action="/postAccountEditSkill/<%= skill._id %>" class="form" method="POST">
+                                    <!-- Input:Text -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Name: </label>
+                                      <input class="input input--text" id="formInput#text" type="text" name="skillName"
+                                        pattern="[a-zA-Z'-'\s]*" title="Alphabets are allowed only!"
+                                        value="<%= skill.name %>" />
+                                    </div>
+                                    <!-- Input:TextArea -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Description: </label>
+                                      <textarea class="input input--text" id="formInput#text" type="text"
+                                        name="skillDescription"><%= skill.description %></textarea>
+                                    </div>
+                                    <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                                  </form>
+
+                                </div>
+                              </main>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Edit Skills Modal -->
+                      <!-- Delete Skills Modal -->
+                      <div class="modal fade" id="Delete<%= skill._id %>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header ">
+                              <h5 class="text-center modal-title" id="exampleModalLabel">Deleting the following item!
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <main class="formPage">
+                                <div class="content-box">
+                                  <form action="/postAccountDeleteSkill/<%= skill._id %>" class="form" method="POST">
+                                    <h4 class="text-center">Do you want to delete the skill?</h4>
+                                    <!-- Input:Text -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Name: </label>
+                                      <input class="input input--text" id="formInput#text" type="text" name="skillName"
+                                        value="<%= skill.name %>" disabled />
+                                    </div>
+                                    <!-- Input:TextArea -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Description: </label>
+                                      <textarea class="input input--text" id="formInput#text" type="text"
+                                        name="skillDescription" disabled><%= skill.description %></textarea>
+                                    </div>
+                                    <input class="btn btn-danger float-right" type="submit" value="Delete" />
+                                  </form>
+
+                                </div>
+                              </main>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Delete Skills Modal -->
+                      <% }); %>
+                        <% } %>
+              </table>
+
+              <div class="settings">
+                <h3 class="settings__title">Projects</h3>
+                <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#" data-toggle="modal"
+                  data-target="#addProjectModal"><i class="im im-plus"></i> Add Project</a>
+              </div>
+              <!-- Project Modal -->
+              <div class="modal fade" id="addProjectModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header ">
+                      <h5 class="text-center modal-title" id="exampleModalLabel">Add Project</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <main class="formPage">
+                        <div class="content-box">
+                          <div class="user-message user-message--error">
+                            <b>Please add all the Information in the form in order to get your project visible in our freelancing projects page</b>
+                          </div>
+                          <form action="/postAccountAddProject" class="form" method="POST"
+                            enctype="multipart/form-data">
+                            <!-- Input:Text -->
+                            <div class="form__field">
+                              <label for="formInput#text">Name: </label>
+                              <input class="input input--text" id="formInput#text" type="text" name="projectName"
+                                pattern="[a-zA-Z'-'\s]*" title="Alphabets are allowed only!" placeholder="Enter text" />
+                            </div>
+                            <!-- Input:Text -->
+                            <div class="form__field">
+                              <label for="formInput#text">Tools & Stacks: </label>
+                              <input 
+                                class="input input--text" 
+                                id="formInput#text" 
+                                type="text" 
+                                name="projectToolsAndStacks"
+                                pattern="^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*$"  
+                                title="Comma Seperated Alphanumeric characters without spaces are Allowed!" 
+                                placeholder="Tool1,Tool2,Tool3,Tool4...." />
+                            </div>
+                            <!-- Input:Image -->
+                            <div class="form__field">
+                              <label for="formInput#text">Image File: </label>
+                              <input class="input input--text" id="formInput#text" type="file" name="projectImage"
+                                title="PNG, JPEG, JPG Formats are allowed!" accept="image/png, image/jpeg, image/jpg" />
+                            </div>
+                            <!-- Input:url -->
+                            <div class="form__field">
+                              <label for="formInput#text">Source Code Link: </label>
+                              <input class="input input--text" id="formInput#text" type="url"
+                                name="projectSourceCodeLink" placeholder="Enter url" />
+                            </div>
+                            <!-- Input:TextArea -->
+                            <div class="form__field">
+                              <label for="formInput#text">About the project: </label>
+                              <textarea class="input input--text" id="formInput#text" type="text" name="projectAbout"
+                                placeholder="Enter text"></textarea>
+                            </div>
+                            <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                          </form>
+
+                        </div>
+                      </main>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Project Modal -->
+              <% if (user.projects.length <=0) { %>
+                <h4 class="text-center">No Project Added!</h4>
+                <h4 class="text-center">Add your Projects!</h4>
+                <% } else { %>
+                  <table class="settings__table card">
+                    <% user.projects.forEach(project=> { %>
+                      <tr>
+                        <td class="settings__thumbnail">
+                          <a href="/single-project/<%= project._id %>"><img src="<%= project.projectImageLink%>"
+                              alt="Project Thumbnail" /></a>
+                        </td>
+                        <td class="settings__tableInfo">
+                          <a href="/single-project/<%= project._id %>">
+                            <%= project.name%>
+                          </a>
+                          <p>
+                            <%= project.aboutTheProject %>
+                          </p>
+                        </td>
+                        <td class="settings__tableActions">
+                          <a class="tag tag--pill tag--main settings__btn" href="#" data-toggle="modal"
+                            data-target="#Edit<%= project._id %>"><i class="im im-edit"></i> Edit</a>
+                          <a class="tag tag--pill tag--main settings__btn" href="#" data-toggle="modal"
+                            data-target="#Delete<%= project._id %>"><i class="im im-x-mark-circle-o"></i>Delete</a>
+                        </td>
+                      </tr>
+                      <!--Edit Project Modal -->
+                      <div class="modal fade" id="Edit<%= project._id %>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header ">
+                              <h5 class="text-center modal-title" id="exampleModalLabel">Edit Project</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <main class="formPage">
+                                <div class="content-box">
+                                  <div class="user-message user-message--error">
+                                    <b>Please add all the Information in the form in order to get your project visible in our freelancing projects page</b>
+                                  </div>        
+                                  <form action="/postAccountEditProject/<%= project._id %>" class="form" method="POST"
+                                    enctype="multipart/form-data">
+                                    <!-- Input:Text -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Name: </label>
+                                      <input class="input input--text" id="formInput#text" type="text"
+                                        pattern="[a-zA-Z'-'\s]*" title="Alphabets are allowed only!" name="projectName"
+                                        value="<%= project.name %>" />
+                                    </div>
+                                    <!-- Input:Text -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Tools & Stacks: </label>
+                                      <input 
+                                          class="input input--text" 
+                                          id="formInput#text" 
+                                          type="text"
+                                          name="projectToolsAndStacks"
+                                          pattern="^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*$"
+                                          title="Comma Seperated Alphanumeric characters without spaces are Allowed!"
+                                          value="<%= project.ToolsAndStacks %>"/>
+                                    </div>
+                                    <!-- Input:Image -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Image File: </label>
+                                      <input class="input input--text" id="formInput#text" type="file"
+                                        title="JPG, JPEG, PNG formats are alllowed!" name="projectImage"
+                                        accept="image/png, image/jpeg" />
+                                    </div>
+                                    <!-- Input:url -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Source Code Link: </label>
+                                      <input class="input input--text" id="formInput#text" type="url"
+                                        name="projectSourceCodeLink" value="<%= project.projectSourceCodeLink %>" />
+                                    </div>
+                                    <!-- Input:TextArea -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">About the project: </label>
+                                      <textarea class="input input--text" id="formInput#text" type="text"
+                                        name="projectAbout"><%= project.aboutTheProject %></textarea>
+                                    </div>
+                                    <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                                  </form>
+                                </div>
+                              </main>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Edit Project Modal -->
+                      <!--Delete Project Modal -->
+                      <div class="modal fade" id="Delete<%= project._id %>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header ">
+                              <h5 class="text-center modal-title" id="exampleModalLabel">Deleting the following Project
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <main class="formPage">
+                                <div class="content-box">
+                                  <form action="/postAccountDeleteProject/<%= project._id %>" class="form" method="POST"
+                                    enctype="multipart/form-data">
+                                    <h5 class="text-center">Do you want to delete the project?</h5>
+                                    <!-- Input:Text -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Name: </label>
+                                      <input class="input input--text" id="formInput#text" type="text"
+                                        name="projectName" value="<%= project.name %>" disabled />
+                                    </div>
+                                    <!-- Input:Text -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Tools & Stacks: </label>
+                                      <input class="input input--text" id="formInput#text" type="text"
+                                        name="projectToolsAndStacks" value="<%= project.ToolsAndStacks %>" disabled />
+                                    </div>
+                                    <!-- Input:Image -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Image File: </label>
+                                      <input class="input input--text" id="formInput#text" type="file"
+                                        name="projectImage" accept="image/png, image/jpeg" disabled />
+                                    </div>
+                                    <!-- Input:url -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">Source Code Link: </label>
+                                      <input class="input input--text" id="formInput#text" type="url"
+                                        name="projectSourceCodeLink" value="<%= project.projectSourceCodeLink %>"
+                                        disabled />
+                                    </div>
+                                    <!-- Input:TextArea -->
+                                    <div class="form__field">
+                                      <label for="formInput#text">About the project: </label>
+                                      <textarea class="input input--text" id="formInput#text" type="text"
+                                        name="projectAbout" disabled><%= project.aboutTheProject %></textarea>
+                                    </div>
+                                    <input class="btn btn-primary float-right" type="submit" value="Submit" />
+                                  </form>
+                                </div>
+                              </main>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Delete Project Modal -->
+
+                      <% }); %>
+                        <% } %>
+                  </table>
+            </div>
+          </div>
+        </div>
+      </main>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+  </body>
+
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/@yaireo/tagify"></script>
+  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script> -->
+
+  <!-- <script>
+    // The DOM element you wish to replace with Tagify
+    var input1 = document.querySelector('input[name=addProjectToolsAndStacks]');
+    
+    var input2 = document.querySelector('input[name=editProjectToolsAndStacks]');
+
+    // initialize Tagify on the above input node reference
+    
+    new Tagify(input1)
+    new Tagify(input2)
+    
+  </script> -->
+
+  </html>

@@ -1,0 +1,20 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <%- include('includes/navigation.ejs') %>
+
+  <!-- Main Section -->
+  <main class="messagePage my-xl">
+    <div class="content-box">
+      <div class="message">
+        <a class="backButton" href="/inbox"><i class="im im-angle-left"></i></a>
+        <h2 class="message__subject"><%= message.title %></h4>
+          <a href="/profile/<%= message.fromUserId %>" class="message__author"><%= message.fromUserName %></a>
+          <p class="message__date"><%= message.date %></p>
+          <div class="message__body"> <%= message.messageText %></div>
+      </div>
+    </div>
+  </main>
+  <%- include('includes/end.ejs') %>

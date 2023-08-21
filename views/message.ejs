@@ -1,0 +1,49 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <%- include('includes/navigation.ejs') %>
+
+  <!-- Main Section -->
+  <main class="messagePage my-xl">
+    <div class="content-box">
+      <div class="message">
+        <a class="backButton" href="<% if (signupPage) { %>/admin/login<% } else { %>/inbox<% } %>"><i class="im im-angle-left"></i></a>
+        <h2 class="message__subject"><% if (signupPage) { %>Verification Required<% } else { %>Working Opportunity for Web Design Company<% } %></h4>
+          <a href="/profile" class="message__author"><% if (inboxPage) { %>Dennis Ivanov<% } %></a>
+          <p class="message__date"><% if (inboxPage) { %>May 31, 2021, 04:37 PM<% } %></p>
+          <div class="message__body">
+            <% if (signupPage) 
+              { %>Please visit your Email Address and click on the link provided to get verified <br> 
+                  <ul class="dev__social">
+                  <li>
+                    <a title="Github" href="#" target="_blank"><i class="im im-github"></i></a>
+                  </li>
+                  <li>
+                    <a title="Stackoverflow" href="#" target="_blank"><i class="im im-stackoverflow"></i></a>
+                  </li>
+                  <li>
+                    <a title="Twitter" href="#" target="_blank"><i class="im im-twitter"></i></a>
+                  </li>
+                  <li>
+                    <a title="LinkedIn" href="#" target="_blank"><i class="im im-linkedin"></i></a>
+                  </li>
+                  <li>
+                    <a title="Personal Website" href="#" target="_blank"><i class="im im-globe"></i></a>
+                  </li>
+                </ul>
+              <% } 
+              else 
+              { %>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, ea? Facere minus vel nam, quas nisi dolore possimus tempora commodi. Praesentium nisi totam quas pariatur culpa nostrum dolore, nemo voluptatem!
+                  <br /><br />
+                  Voluptate dolores veniam ducimus cumque, harum fuga quaerat, culpa distinctio voluptas magnam a unde
+                  reiciendis similique necessitatibus obcaecati voluptatibus deserunt voluptatum numquam ullam in ipsum, ea
+                  aperiam. Dolorum rerum pariatur quaerat. Debitis tempora aliquid libero alias aperiam illo fuga ipsum magni
+                  quia.
+              <% } %>
+          </div>
+      </div>
+    </div>
+  </main>
+  <%- include('includes/end.ejs') %>

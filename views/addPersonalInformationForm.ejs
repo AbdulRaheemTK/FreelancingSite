@@ -1,0 +1,134 @@
+<%- include('includes/head.ejs') %>
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <%- include('includes/navigation.ejs') %>
+  
+    <!-- Main Section -->
+      <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+              <% if(errorMessage) {%>
+                <div class="user-message user-message--error">
+                  <b><%= errorMessage %></b>
+                </div>
+              <% } else if(!errorMessage) { %>
+                <div class="user-message user-message--error">
+                  <b>Please add all the Information in the form in order to get yourself visible in our freelancing developers page</b>
+                  <br>
+                  You can edit the Information later using My Account Page!
+                </div>
+              <% } %>
+              <br>
+                <form class="form" method="POST" enctype="multipart/form-data" action="/postAccountPersonalInformation">
+                    <h3 class="text-center">Add your personal Information</h3>
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Name:* </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPIName')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="text"
+                                name="EPIName"
+                                value="<%=oldInput.EPIName %>"/>
+                      </div>
+                      <!-- Input:TextArea -->
+                      <div class="form__field">
+                        <label for="formInput#text">Abilities & Experiences:* </label>
+                        <textarea
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPIAbilitiesAndExperiences')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="text"
+                                name="EPIAbilitiesAndExperiences"><%= oldInput.EPIAbilitiesAndExperiences %></textarea>
+                      </div>
+                      <!-- Input:Image -->
+                      <div class="form__field">
+                        <label for="formInput#text">Personel Image:* </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPIImage')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="file"
+                                name="EPIImage"
+                                accept="image/png, image/jpeg" />
+                      </div>
+                      <!-- Input:Text -->
+                      <div class="form__field">
+                        <label for="formInput#text">City:* </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPICity')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="text"
+                                name="EPICity"
+                                value="<%= oldInput.EPICity %>"/>
+                      </div>
+                      <!-- Input:Text -->
+                      <div class="form__field">
+                        <label for="formInput#text">Country:* </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPICountry')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="text"
+                                name="EPICountry"
+                                value="<%= oldInput.EPICountry %>"/>
+                      </div>
+                      <!-- Input:url -->
+                      <div class="form__field">
+                        <label for="formInput#text">Git Hub Link: </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPIGitHubLink')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="url"
+                                name="EPIGitHubLink"
+                                value="<%= oldInput.EPIGitHubLink %>"/>
+                      </div>
+                      <!-- Input:url -->
+                      <div class="form__field">
+                        <label for="formInput#text">Stackoverflow Link: </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPIStackoverflowLink')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="url"
+                                name="EPIStackoverflowLink"
+                                value="<%= oldInput.EPIStackoverflowLink  %>"/>
+                      </div>
+                      <!-- Input:url -->
+                      <div class="form__field">
+                        <label for="formInput#text">Twitter Link: </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPITwitterLink')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="url"
+                                name="EPITwitterLink"
+                                value="<%= oldInput.EPITwitterLink %>"/>
+                      </div>
+                      <!-- Input:url -->
+                      <div class="form__field">
+                        <label for="formInput#text">LinkedIn Link: </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPILinkedInLink')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="url"
+                                name="EPILinkedInLink"
+                                value="<%= oldInput.EPILinkedInLink %>"/>
+                      </div>
+                      <!-- Input:url -->
+                      <div class="form__field">
+                        <label for="formInput#text">Personal Website Link: </label>
+                        <input
+                                class="input input--text <%= validationErrors.find(e => e.param === 'EPIPersonalWebsiteLink')  ? 'border border-danger' : '' %>"
+                                id="formInput#text"
+                                type="url"
+                                name="EPIPersonalWebsiteLink"
+                                value="<%= oldInput.EPIPersonalWebsiteLink %>" />
+                      </div>
+                      <input class="input input--text" id="formInput#text" type="text" name="formName" value="addPersonalInformationForm" hidden/>
+                      <!-- <a class="backButton" href="#"><i class="im im-angle-right"></i></a> -->
+                      <div class="text-right">
+                        <input class="btn btn--sub btn--lg  my-md " type="submit" value=">"/>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <%- include('includes/end.ejs') %>

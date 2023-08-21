@@ -1,0 +1,56 @@
+<%- include('includes/head.ejs') %>
+  </head>
+
+  <body>
+    <div class="auth">
+      <div class="card">
+        <div class="auth__header text-center">
+          <a href="/">
+            <img src="/images/icon.svg" alt="icon" />
+          </a>
+          <h3>Account Login</h3>
+          <p>Hello Developer, Welcome Back!</p>
+        </div>
+        <% if(errorMessage) {%>
+          <div class="user-message user-message--error">
+            <b><%= errorMessage %></b>
+          </div>
+        <% } %>
+        <form action="/admin/login" class="form auth__form" method="POST">
+          <!-- Input:Email -->
+          <div class="form__field">
+            <label for="formInput#text">Email Address: </label>
+            <input
+              class="input input--text <%= validationErrors.find(e => e.param === 'email')  ? 'border border-danger' : '' %>"
+              id="formInput#text"
+              type="email"
+              name="email"
+              placeholder="Enter your email..."
+              value="<%=oldInput.email %>"
+            />
+          </div>
+
+          <!-- Input:Password -->
+          <div class="form__field">
+            <label for="formInput#password">Password: </label>
+            <input
+              class="input input--password <%= validationErrors.find(e => e.param === 'password')  ? 'border border-danger' : '' %>"
+              id="formInput#passowrd"
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value="<%=oldInput.password %>"
+            />
+          </div>
+          <div class="auth__actions">
+            <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+            <a href="/admin/forgetpassword">Forget Password?</a>
+          </div>
+        </form>
+        <div class="auth__alternative">
+          <p>Don’t have an Account?</p> 
+          <a href="/admin/signup">Sign Up</a>
+        </div>
+      </div>
+    </div>
+    <%- include('includes/end.ejs') %>

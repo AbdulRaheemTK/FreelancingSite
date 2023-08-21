@@ -1,0 +1,23 @@
+<div class="pagination">
+    <ul class="container">
+        <% if(!name){ %>
+            <% if (!hasPreviousPage) { %>
+                <li><a href="#" class="btn btn--disabled">&#10094; Prev</a></li>
+            <% } else { %>
+                <li><a href="/<%= path%>?page=<%= previousPage %>" class="btn">&#10094; Prev</a></li>
+            <% } %>
+
+            <li><a href="/<%= path%>?page=<%= currentPage %>" class="btn btn--sub "><%= currentPage %></a></li>
+
+            <% if (hasNextPage) { %>
+                <li><a href="/<%= path%>?page=<%= nextPage %>" class="btn "><%= nextPage %></a></li>
+            <% } %>
+
+            <% if (lastPage !== currentPage) { %>
+                <li><a href="/<%= path%>?page=<%= nextPage %>" class="btn">Next &#10095;</a></li>
+            <% } %>
+        <% } %>
+    </ul>
+
+
+</div>

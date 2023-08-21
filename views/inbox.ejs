@@ -1,0 +1,29 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <%- include('includes/navigation.ejs') %>
+
+  <!-- Main Section -->
+  <main class="inbox my-xl">
+    <div class="content-box">
+      <% if(!user.messages[0]){ %>
+        <h1 class="text-center">Inbox is Empty!</h1>
+      <% } else { %>
+      <h3 class="inbox__title">New Messages(<span><%= (user.messages.filter(message => message.messageRead == false)).length %></span>)</h3>
+      <ul class="messages">
+        <% user.messages.reverse().forEach(message=> { %> 
+        <li class="<% if(message.messageRead == false) { %> message message--unread <% } else { %> message message--read <% } %>">
+          <a href="/inboxMessage/<%= message._id %>">
+            <span class="message__author"><%= message.fromUserName %></span>
+            <span class="message__subject"><%= message.title %></span>
+            <span class="message__date"><%= message.date %></span>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+      <% } %>  
+    </div>
+  </main>
+<%- include('includes/end.ejs') %>

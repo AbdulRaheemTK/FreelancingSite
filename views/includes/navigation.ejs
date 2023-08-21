@@ -1,0 +1,29 @@
+<header class="header">
+    <div class="container container--narrow">
+      <a href="/" class="header__logo">
+        <img src="/images/logo.svg" alt="DevSearch Logo" />
+      </a>
+      <nav class="header__nav">
+        <input type="checkbox" id="responsive-menu" />
+        <label for="responsive-menu" class="toggle-menu">
+          <span>Menu</span>
+          <div class="toggle-menu__lines"></div>
+        </label>
+        <ul class="header__menu">
+          <li class="header__menuItem"><a href="/">Developers</a></li>
+          <li class="header__menuItem"><a href="/projects">Projects</a></li>
+          
+          <li class="header__menuItem" <% if(!token){ %>hidden<% } %>><a href="/inbox">Inbox</a></li>
+          <li class="header__menuItem" <% if(!token){ %>hidden<% } %>><a href="/account">My Account</a></li>
+          <% if(!token && authenticationNotRequired){ %>
+            <li class="header__menuItem"><a href="/admin/login" class="btn btn--sub">Login/Sign Up</a></li>
+          <% } else{ %>  
+            <form action="/admin/logout" method="post">
+              <li class="header__menuItem"><input class = "btn btn--sub" type="submit" value="Logout"/></li>
+          </form>
+         <% } %>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>

@@ -1,0 +1,77 @@
+<%- include('includes/head.ejs') %>
+    </head>
+
+    <body>
+        <div class="auth">
+            <div class="card">
+                <div class="auth__header text-center">
+                    <a href="/">
+                        <img src="/images/icon.svg" alt="icon" />
+                    </a>
+                    <h3>Account SignUp</h3>
+                    <p>Create a new developer account</p>
+                </div>
+                <% if(errorMessage) {%>
+                    <div class="user-message user-message--error">
+                      <b><%= errorMessage %></b>
+                    </div>
+                <% } %>          
+
+                <form action="/admin/signup" class="form auth__form" method="POST">
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">User Name: </label>
+                        <input 
+                            class="input input--text <%= validationErrors.find(e => e.param === 'username' || 'email-username')  ? 'border border-danger' : '' %>" 
+                            id="formInput#text" 
+                            type="text" 
+                            name="username"
+                            placeholder="e.g. Dennis Ivanov" 
+                            value="<%=oldInput.username %>"/>
+                    </div>
+
+                    <!-- Input:Email -->
+                    <div class="form__field">
+                        <label for="formInput#email">Email Address: </label>
+                        <input 
+                            class="input input--email <%= validationErrors.find(e => e.param === 'email' || 'email-username')  ? 'border border-danger' : '' %>" 
+                            id="formInput#email" 
+                            type="email" 
+                            name="email"
+                            placeholder="e.g. user@domain.com" 
+                            value="<%=oldInput.email %>"/>
+                    </div>
+
+                    <!-- Input:Password -->
+                    <div class="form__field">
+                        <label for="formInput#password">Password: </label>
+                        <input 
+                            class="input input--password <%= validationErrors.find(e => e.param === 'password')  ? 'border border-danger' : '' %>" 
+                            id="formInput#passoword" 
+                            type="password" 
+                            name="password"
+                            placeholder="••••••••" 
+                            value="<%=oldInput.password %>"/>
+                    </div>
+                    <!-- Input:Password -->
+                    <div class="form__field">
+                        <label for="formInput#confirm-password">Confirm Password: </label>
+                        <input 
+                            class="input input--password <%= validationErrors.find(e => e.param === 'confirmPassword')  ? 'border border-danger' : '' %>" 
+                            id="formInput#confirm-password" 
+                            type="password" 
+                            name="confirmPassword" 
+                            placeholder="••••••••" 
+                            value="<%=oldInput.confirmPassword %>"/>
+                    </div>
+                    <div class="auth__actions">
+                        <input class="btn btn--sub btn--lg" type="submit" value="Sign Up" />
+                    </div>
+                </form>
+                <div class="auth__alternative">
+                    <p>Already have an Account?</p>
+                    <a href="/admin/login">Log In</a>
+                </div>
+            </div>
+        </div>
+        <%- include('includes/end.ejs') %>

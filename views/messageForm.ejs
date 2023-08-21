@@ -1,0 +1,34 @@
+<%- include('includes/head.ejs') %>
+    </head>
+
+    <body>
+        <!-- Header Section -->
+        <%- include('includes/navigation.ejs') %>
+
+            <!-- Main Section -->
+            <main class="formPage my-xl">
+                <div class="content-box">
+                    <div class="formWrapper">
+                        <form action="/postMessageForm/<%= toUser._id %>" class="form" method="POST">
+                            <a class="backButton" href="/profile/<%= toUser._id %>"><i class="im im-angle-left"></i></a>
+                            <h2 class="text-center">Send Message</h2>
+                            <br>
+                            <h5><b>To: </b><%= toUser.personalInformation.name %> </h5>
+                            <!-- Input:TextA -->
+                            <div class="form__field">
+                                <label for="formInput#text">Title: </label>
+                                <input class="input input--text" id="formInput#text" type="text" name="messagetitle" />
+                            </div>
+                            <!-- Input:TextArea -->
+                            <div class="form__field">
+                                <label for="formInput#text">Message: </label>
+                                <textarea class="input input--text" id="formInput#text" type="text" rows="5" name="messageText"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <input class="btn btn--sub btn--lg  my-md  " type="submit" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+            <%- include('includes/end.ejs') %>
